@@ -1,13 +1,13 @@
 package CustomListeners;
 
 import org.testng.*;
+import utils.AllureUtils;
 import utils.PropertyReader;
-
-import java.util.Properties;
 
 //After making the listener we need to connect it to our test class, we can do that by adding @Listeners annotation to our test class and providing the listener class as a parameter
 //Runs before the execution of the method
 public class TestNGListeners implements IInvokedMethodListener, ITestListener, IExecutionListener { //Look up the implementation of IInvokedMethodListener and implement the methods
+    AllureUtils allureUtils = new AllureUtils();
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         if(method.isTestMethod()) //this if condition tells the Listeners to run the interface only if it was a test method/case
             System.out.println(method.getTestMethod().getMethodName() + " started");
@@ -39,6 +39,7 @@ public class TestNGListeners implements IInvokedMethodListener, ITestListener, I
     public void onExecutionStart() {
         System.out.println("Execution started");
         PropertyReader.loadProperties(); //this will load all the properties files in our project and make them available as system properties, so we can use System.getProperty() to get any property we want from any file
+        allureUtils.cleanAllureResults();
     }
 
     // Executes after everything finishes
