@@ -44,7 +44,7 @@ public class PropertyReader {
             return System.getProperty(key);
         }catch (Exception e){
             System.out.println("Error getting property: " + key);
-            return null;
+            return "";
         }
     }
 

@@ -25,7 +25,7 @@ public class HomeTest {
     //Configuration
     @BeforeMethod
     public void setUp(){
-        driver = WebDriverFactory.initDriver("chrome");
+        driver = WebDriverFactory.initDriver();
         driver.get("https://www.saucedemo.com");
 
     }
