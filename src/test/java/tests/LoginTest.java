@@ -29,14 +29,13 @@ public class LoginTest {
                 .isLoggedIn("https://www.saucedemo.com/");
     }
 
-
     //Configuration
     @BeforeMethod
     public void setUp(){
         driver = WebDriverFactory.initDriver("chrome");
         driver.get("https://www.saucedemo.com");
-
     }
+
     @AfterMethod
     public void tearDown(){
         WebDriverFactory.quitDriver();
