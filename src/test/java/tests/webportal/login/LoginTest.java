@@ -1,8 +1,8 @@
-package tests;
+package tests.webportal.login;
 
+import com.google.common.collect.ImmutableMap;
 import drivers.WebDriverFactory;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.PropertyReader;
+
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 public class LoginTest {
     //Variables
@@ -34,6 +36,10 @@ public class LoginTest {
                 .isLoggedIn("https://www.saucedemo.com/inventory.html");
     }
 
+    //behavioral-based hierarchy in Allure to organize the test cases in the report based on the features and epics
+    @Epic("Web Portal")
+    @Feature("Login Feature")
+    @Story("InValid Test Cases")
     @Test
     public void inValidLoginTest(){
         //pages.LoginPage loginPage = new pages.LoginPage(driver); //this.driver(page object's driver) = driver(test file's driver)
@@ -47,6 +53,7 @@ public class LoginTest {
     public void setUp(){
         driver = WebDriverFactory.initDriver(); //chrome
         driver.get(PropertyReader.getProperty("baseUrl"));
+
     }
 
     @AfterMethod
@@ -54,3 +61,5 @@ public class LoginTest {
         WebDriverFactory.quitDriver();
     }
 }
+// allure generate test-output/allure-results -o test-output/reports --clean
+// allure generate test-output/allure-results -o test-output/report-single/ --clean --single-file

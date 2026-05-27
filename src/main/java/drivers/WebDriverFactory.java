@@ -1,8 +1,11 @@
 package drivers;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ThreadGuard;
 import utils.PropertyReader;
+
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 public class WebDriverFactory {
     private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
@@ -29,7 +32,11 @@ public class WebDriverFactory {
         driverThreadLocal.set(driver);
         return driverThreadLocal.get();
     }
+    public static WebDriver getCurrentDriver(){
+        return driverThreadLocal.get();
+    }
     public static void quitDriver(){
         driverThreadLocal.get().quit();
     }
+
 }

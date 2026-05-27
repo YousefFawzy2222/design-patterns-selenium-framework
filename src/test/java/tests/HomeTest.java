@@ -31,7 +31,6 @@ public class HomeTest {
         jsonReader = new JsonReader("home-data");
         driver = WebDriverFactory.initDriver();
         driver.get("https://www.saucedemo.com");
-
     }
     @AfterMethod
     public void tearDown(){

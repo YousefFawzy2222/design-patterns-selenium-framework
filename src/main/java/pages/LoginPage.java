@@ -1,6 +1,7 @@
 package pages;
 
 import bots.ActionsBot;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -25,6 +26,7 @@ public class LoginPage {
 
     // Actions
     // best practice not to make an action to each function make it generic
+    @Step("login to web portal with {username} and {pass}") //
     public LoginPage login(String username, String pass){ // We made the return type as pages.LoginPage to implement Method Chaining -> Fluent Pattern Approach
 //        driver.findElement(userName).sendKeys(username);
 //        driver.findElement(password).sendKeys(pass);
@@ -35,6 +37,8 @@ public class LoginPage {
         return this; //Same as if we said "return new LoginPage(driver)"
     }
 
+    //validations
+    @Step("Validate that the user is logged-in with {expectedUrl}")
     public HomePage isLoggedIn(String expectedUrl){
         // Here we violate the documentation of selenium in the POM part by adding our assertion not on the test but on the Page Object and this is because we want to make method chaining to make our tests much abstracted and clean
         Assert.assertEquals(driver.getCurrentUrl(),expectedUrl);

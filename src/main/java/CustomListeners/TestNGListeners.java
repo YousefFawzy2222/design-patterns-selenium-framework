@@ -1,8 +1,10 @@
 package CustomListeners;
 
+import drivers.WebDriverFactory;
 import org.testng.*;
 import utils.AllureUtils;
 import utils.PropertyReader;
+import utils.ScreenshotUtils;
 
 //After making the listener we need to connect it to our test class, we can do that by adding @Listeners annotation to our test class and providing the listener class as a parameter
 //Runs before the execution of the method
@@ -15,13 +17,16 @@ public class TestNGListeners implements IInvokedMethodListener, ITestListener, I
 
     // Runs after the execution of the method
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-        if(method.isTestMethod())
+        if(method.isTestMethod()) {
+            ScreenshotUtils.takeScreenshot(WebDriverFactory.getCurrentDriver(), testResult.getName()); //this will take a screenshot of the current page and save it in the test-output/screenshots folder with the name of the test method, and also attach it to the allure report
             System.out.println(method.getTestMethod().getMethodName() + " finished");
+        }
     }
 
     // Runs after the execution if the method passed
     public void onTestSuccess(ITestResult result){
         System.out.println(result.getMethod().getMethodName() + " passed");
+
     }
 
     //Runs after the execution if the method failed
@@ -45,6 +50,7 @@ public class TestNGListeners implements IInvokedMethodListener, ITestListener, I
     // Executes after everything finishes
     public void onExecutionFinish() {
         System.out.println("Execution finished");
+        AllureUtils.setAllureEnvironment(); //this will set the environment variables in the allure report, so we can see them in the environment tab in the allure report
     }
 
 
